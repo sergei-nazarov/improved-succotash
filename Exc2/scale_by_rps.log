@@ -1,0 +1,8 @@
+sergey@MacBook-Pro-Kitty ~ % kubectl logs kube-controller-manager-minikube -n kube-system
+I1013 20:51:53.813154       1 replica_set.go:676] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="default/prometheus-adapter-77796cdcc6" duration="26.162833ms"
+I1013 20:51:53.883710       1 replica_set.go:676] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="default/prometheus-adapter-77796cdcc6" duration="237.666µs"
+I1013 21:01:17.068644       1 horizontal.go:881] "Successfully rescaled" logger="horizontal-pod-autoscaler-controller" HPA="scale-test/scaletestapp-hpa" currentReplicas=1 desiredReplicas=3 reason="pods metric http_requests_per_second above target"
+
+
+sergey@MacBook-Pro-Kitty ~ % kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/scale-test/pods/*/http_requests_per_second"
+{"kind":"MetricValueList","apiVersion":"custom.metrics.k8s.io/v1beta1","metadata":{},"items":[{"describedObject":{"kind":"Pod","namespace":"scale-test","name":"scaletestapp-app-fdb76b679-9lk6v","apiVersion":"/v1"},"metricName":"http_requests_per_second","timestamp":"2024-10-13T21:13:27Z","value":"25247m","selector":null},{"describedObject":{"kind":"Pod","namespace":"scale-test","name":"scaletestapp-app-fdb76b679-hl7np","apiVersion":"/v1"},"metricName":"http_requests_per_second","timestamp":"2024-10-13T21:13:27Z","value":"38448m","selector":null},{"describedObject":{"kind":"Pod","namespace":"scale-test","name":"scaletestapp-app-fdb76b679-phd6x","apiVersion":"/v1"},"metricName":"http_requests_per_second","timestamp":"2024-10-13T21:13:27Z","value":"35344m","selector":null}]}
