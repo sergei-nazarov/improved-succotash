@@ -1,4 +1,0 @@
-sergey@MacBook-Pro-Kitty ~ % kubectl logs kube-controller-manager-minikube -n kube-system | grep horizontal.go
-I1013 15:01:26.709736       1 horizontal.go:196] "Starting HPA controller" logger="horizontal-pod-autoscaler-controller"
-I1013 16:29:17.604927       1 horizontal.go:881] "Successfully rescaled" logger="horizontal-pod-autoscaler-controller" HPA="scale-test/scaletestapp-hpa" currentReplicas=1 desiredReplicas=3 reason="memory resource utilization (percentage of request) above target"
-I1013 16:33:18.056617       1 horizontal.go:881] "Successfully rescaled" logger="horizontal-pod-autoscaler-controller" HPA="scale-test/scaletestapp-hpa" currentReplicas=3 desiredReplicas=4 reason="memory resource utilization (percentage of request) above target"
