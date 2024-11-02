@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title PropDevelopment Context Diagram with REST Integration
+
+Person(Owner, "Собственник", "Пользователь мобильного приложения")
+System_Ext(PartnerPlatform, "Внешняя Платформа Партнера", "Сервисы «Интеллектуального домофона» и «Интеллектуального шлагбаума»")
+System_Ext(GovernmentAgency, "Госорганы", "Синхронизация данных для соответствия законодательству")
+
+System_Boundary(PropDevelopment, "PropDevelopment") {
+    System(MobileApp, "Мобильное приложение для собственников", "Позволяет собственникам управлять доступом к функциям Умного дома")
+    System(TenantCore, "Tenant-core-app (Сервис ЖКУ)", "Управляет информацией о доступах через REST API")
+    System(CRM, "CRM", "Система управления данными о собственниках")
+}
+
+Rel(Owner, MobileApp, "Использует для управления функциями Умного дома")
+Rel(MobileApp, TenantCore, "Отправляет запросы на управление доступом")
+Rel(TenantCore, PartnerPlatform, "Предоставляет информацию о доступах (лица, автомобили)", "REST API")
+Rel(TenantCore, CRM, "Получает информацию о собственниках")
+Rel_D(CRM, GovernmentAgency, "Передает данные для соответствия законодательству", "Синхронизация данных")
+
+@enduml
