@@ -1,0 +1,31 @@
+# Роль для просмотра ресурсов кластера
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: viewer
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "deployments", "configmaps"]
+    verbs: ["get", "list", "watch"]
+
+---
+# Роль для настройки ресурсов кластера
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configurator
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "deployments", "configmaps"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+---
+# Роль с привилегиями, включая доступ к секретам
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: admin
+rules:
+  - apiGroups: [""]
+    resources: ["secrets", "pods", "services", "deployments", "configmaps"]
+    verbs: ["get", "list", "watch"]
